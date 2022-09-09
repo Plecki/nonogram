@@ -1,5 +1,6 @@
 plugins {
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
+    kotlin("jvm") version "1.6.21"
 }
 
 subprojects {
@@ -9,6 +10,8 @@ subprojects {
 
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "java-library")
+    apply(plugin = "java-library")
+    apply(plugin = "kotlin")
 
     repositories {
         mavenCentral()

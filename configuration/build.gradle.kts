@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.7.3"
     id("io.kotest") version "0.3.9"
-    kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
 
     application
@@ -14,8 +13,10 @@ application {
 }
 
 dependencies {
-    implementation(project(":presentation"))
     implementation(project(":application"))
+    implementation(project(":persistence"))
+    implementation(project(":common"))
+    implementation(project(":presentation"))
 
     implementation("org.springframework.boot:spring-boot-starter")
 

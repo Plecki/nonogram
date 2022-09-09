@@ -1,2 +1,2 @@
 rootProject.name = "nonogram"
-include(":app", ":application", ":presentation")
+include(":configuration", ":application", ":presentation", ":common", ":persistence")
