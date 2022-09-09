@@ -1,6 +1,6 @@
-class NonogramProviderImpl {
+class NonogramProviderImpl : NonogramProvider {
 
-    fun doNothing() {
+    override fun doNothing() {
         println("did nothing here")
     }
 }

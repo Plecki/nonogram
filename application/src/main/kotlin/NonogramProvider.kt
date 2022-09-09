@@ -1,4 +1,5 @@
 interface NonogramProvider {
 
+    fun doNothing()
 
 }

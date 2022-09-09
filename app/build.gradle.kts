@@ -14,7 +14,7 @@ application {
 }
 
 dependencies {
-//    implementation(project(":terminal-presentation"))
+    implementation(project(":presentation"))
     implementation(project(":application"))
 
     implementation("org.springframework.boot:spring-boot-starter")
