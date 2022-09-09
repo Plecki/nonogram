@@ -1,6 +1,21 @@
 package com.example.nonogram
 
-class NonogramApplication
+import NonogramProviderImpl
+import org.springframework.boot.CommandLineRunner
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
-fun main(args: Array<String>) {
+@SpringBootApplication
+class NonogramApplication : CommandLineRunner {
+
+    override fun run(vararg args: String?) {
+        NonogramProviderImpl().doNothing()
+    }
+
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            runApplication<NonogramApplication>(*args)
+        }
+    }
 }

@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") version "2.7.3"
-    id("io.spring.dependency-management") version "1.0.13.RELEASE"
     id("io.kotest") version "0.3.9"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
@@ -10,19 +9,16 @@ plugins {
     application
 }
 
-group = "com.example"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
-
-repositories {
-    mavenCentral()
-}
-
 application {
     mainClass.set("com.example.nonogram.NonogramApplication")
 }
 
 dependencies {
+//    implementation(project(":terminal-presentation"))
+    implementation(project(":application"))
+
+    implementation("org.springframework.boot:spring-boot-starter")
+
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
