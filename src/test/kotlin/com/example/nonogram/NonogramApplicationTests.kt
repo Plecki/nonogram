@@ -1,13 +1,16 @@
 package com.example.nonogram
 
-import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
+import io.kotest.assertions.fail
+import io.kotest.core.spec.style.ShouldSpec
 
-@SpringBootTest
-class NonogramApplicationTests {
+class NonogramApplicationTests : ShouldSpec({
 
-    @Test
-    fun contextLoads() {
+    should("pass") {
+
     }
 
-}
+    should("fail") {
+        fail("just fail")
+    }
+
+})
