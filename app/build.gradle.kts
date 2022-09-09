@@ -6,6 +6,8 @@ plugins {
     id("io.kotest") version "0.3.9"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
+
+    application
 }
 
 group = "com.example"
@@ -14,6 +16,10 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClass.set("com.example.nonogram.NonogramApplication")
 }
 
 dependencies {

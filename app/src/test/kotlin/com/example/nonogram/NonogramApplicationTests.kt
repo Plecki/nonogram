@@ -8,5 +8,8 @@ class NonogramApplicationTests : ShouldSpec({
 
     }
 
+    should("fail") {
+//        fail("lol")
+    }
 
 })
