@@ -1,10 +1,21 @@
 import domain.BoardDefinition
 import port.persistence.NonogramGetter
+import java.io.File
+import java.io.FileReader
 
-class FileNonogramGetter : NonogramGetter {
+class FileNonogramGetter(
+    private val file: File,
+    private val boardDefinitionConverter: BoardDefinitionConverter
+) : NonogramGetter {
+
+    constructor(resourcesFileName: String, boardDefinitionConverter: BoardDefinitionConverter)
+            : this(
+        File(FileNonogramGetter::class.java.classLoader.getResource(resourcesFileName).toURI()),
+        boardDefinitionConverter
+    )
+
     override fun getNonogram(): BoardDefinition {
-        // TODO
-        println("Getting a board")
-        return BoardDefinition(listOf(), listOf())
+        val lines = FileReader(file).readLines()
+        return boardDefinitionConverter.convert(lines)
     }
 }

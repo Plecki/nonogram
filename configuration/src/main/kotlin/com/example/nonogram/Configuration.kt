@@ -1,14 +1,19 @@
 package com.example.nonogram
 
+import BoardDefinitionConverter
 import FileNonogramGetter
+import LineDefinitionConverter
 import NonogramPresentationUseCase
 import NonogramPresentationUseCaseImpl
+import RowColSplitter
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import port.persistence.NonogramGetter
 import port.presentation.NonogramPresentation
 
 @Configuration
+@ComponentScan
 class Configuration {
 
     @Bean
@@ -25,7 +30,13 @@ class Configuration {
     }
 
     @Bean
-    fun nonogramGetter(): NonogramGetter {
-        return FileNonogramGetter()
+    fun nonogramGetter(boardDefinitionConverter: BoardDefinitionConverter): NonogramGetter {
+        // TODO configuration of file
+        return FileNonogramGetter("simple-nonogram.txt", boardDefinitionConverter)
+    }
+
+    @Bean
+    fun boardDefinitionConverter(): BoardDefinitionConverter {
+        return BoardDefinitionConverter(RowColSplitter(), LineDefinitionConverter())
     }
 }

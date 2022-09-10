@@ -1,5 +1,7 @@
 import domain.BoardDefinition
+import org.springframework.stereotype.Service
 
+@Service
 class BoardDefinitionConverter(
     private val rowColSplitter: RowColSplitter,
     private val lineDefinitionConverter: LineDefinitionConverter
