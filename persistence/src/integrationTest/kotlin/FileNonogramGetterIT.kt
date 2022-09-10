@@ -1,6 +1,6 @@
 import io.kotest.core.spec.style.ShouldSpec
 
-class FileNonogramGetterTest : ShouldSpec({
+class FileNonogramGetterIT : ShouldSpec({
 
 
 })
