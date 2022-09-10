@@ -1,7 +1,7 @@
 package domain
 
-class LineDefinition {
+class LineDefinition(private val values: List<Int>) {
     fun getValues(): List<Int> {
-        return listOf(1)
+        return values
     }
 }
