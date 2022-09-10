@@ -1,5 +1,6 @@
 package com.example.nonogram
 
+import com.example.nonogram.terminal.TerminalPresentation
 import domain.BoardDefinition
 import domain.LineDefinition
 import io.kotest.core.spec.style.ShouldSpec

@@ -6,6 +6,7 @@ import LineDefinitionConverter
 import NonogramPresentationUseCase
 import NonogramPresentationUseCaseImpl
 import RowColSplitter
+import com.example.nonogram.terminal.TerminalPresentation
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
