@@ -1,0 +1,5 @@
+interface NonogramPresentationUseCase {
+
+    fun showNonogram()
+
+}

@@ -1,5 +1,0 @@
-interface NonogramPresentation {
-
-    fun present()
-
-}

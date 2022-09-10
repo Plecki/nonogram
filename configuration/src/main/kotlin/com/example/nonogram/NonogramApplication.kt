@@ -1,26 +1,27 @@
 package com.example.nonogram
 
-import NonogramPresentation
-import NonogramProvider
+import NonogramPresentationUseCase
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
 class NonogramApplication(
-    private val nonogramProvider: NonogramProvider,
-    private val nonogramPresentation: NonogramPresentation,
+    private val nonogramPresentationUseCase: NonogramPresentationUseCase,
 ) : CommandLineRunner {
-
-    override fun run(vararg args: String?) {
-        nonogramProvider.doNothing()
-        nonogramPresentation.present()
-    }
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
             runApplication<NonogramApplication>(*args)
         }
+    }
+
+    override fun run(vararg args: String?) {
+        showNonogram()
+    }
+
+    private fun showNonogram() {
+        nonogramPresentationUseCase.showNonogram()
     }
 }
