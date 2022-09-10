@@ -1,9 +1,9 @@
 package port.persistence
 
-import domain.Board
+import domain.BoardDefinition
 
 interface NonogramGetter {
 
-    fun getNonogram(): Board
+    fun getNonogram(): BoardDefinition
 
 }

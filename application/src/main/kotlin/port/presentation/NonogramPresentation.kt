@@ -1,9 +1,9 @@
 package port.presentation
 
-import domain.Board
+import domain.BoardDefinition
 
 interface NonogramPresentation {
 
-    fun present(nonogram: Board)
+    fun present(nonogram: BoardDefinition)
 
 }
