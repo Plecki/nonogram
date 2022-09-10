@@ -1,6 +1,6 @@
 plugins {
     id("io.spring.dependency-management") version "1.0.13.RELEASE"
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.6.10"
 }
 
 subprojects {
