@@ -1,7 +1,5 @@
 import domain.LineDefinition
-import org.springframework.stereotype.Service
 
-@Service
 class LineDefinitionConverter {
     fun convert(lines: List<String>): List<LineDefinition> {
         if (lines.count { it.isBlank() } > 0)

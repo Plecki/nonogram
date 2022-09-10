@@ -1,6 +1,3 @@
-import org.springframework.stereotype.Service
-
-@Service
 class RowColSplitter {
     fun splitRowsAndCols(lines: List<String>): Pair<List<String>, List<String>> {
         val indexOfLastNotBlankLine = lines.indexOfLast { it.isNotBlank() }

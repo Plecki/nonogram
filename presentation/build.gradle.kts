@@ -22,11 +22,11 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:5.4.2")
 }
 
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-    }
-}
+//compose.desktop {
+//    application {
+//        mainClass = "com.example.nonogram.NonogramApplication"
+//    }
+//}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

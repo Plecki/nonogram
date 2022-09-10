@@ -1,9 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.7.3"
     id("io.kotest") version "0.3.9"
-    kotlin("plugin.spring") version "1.6.21"
 
     application
 }
@@ -12,18 +10,19 @@ application {
     mainClass.set("com.example.nonogram.NonogramApplication")
 }
 
+val koin_version = "3.2.0"
+
 dependencies {
     implementation(project(":application"))
     implementation(project(":persistence"))
     implementation(project(":common"))
     implementation(project(":presentation"))
 
-    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("io.insert-koin:koin-core:$koin_version")
+    testImplementation("io.insert-koin:koin-test:$koin_version")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.4.2")
 }
 
