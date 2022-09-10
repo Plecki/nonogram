@@ -2,11 +2,13 @@ package com.example.nonogram
 
 import BoardDefinitionConverter
 import FileNonogramGetter
+import GetBoardUseCase
+import GetBoardUseCaseImpl
 import LineDefinitionConverter
 import NonogramPresentationUseCase
 import NonogramPresentationUseCaseImpl
 import RowColSplitter
-import com.example.nonogram.terminal.TerminalPresentation
+import com.example.nonogram.desktop.DesktopPresentation
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -23,9 +25,10 @@ class NonogramApplication : KoinComponent {
             singleOf(::BoardDefinitionConverter)
             singleOf(::RowColSplitter)
             singleOf(::LineDefinitionConverter)
-            single { TerminalPresentation() as NonogramPresentation }
+            single { DesktopPresentation() as NonogramPresentation }
             single { FileNonogramGetter("simple-nonogram.txt", get()) as NonogramGetter }
             single { NonogramPresentationUseCaseImpl(get(), get()) as NonogramPresentationUseCase }
+            single { GetBoardUseCaseImpl(get()) as GetBoardUseCase }
         }
 
         @JvmStatic

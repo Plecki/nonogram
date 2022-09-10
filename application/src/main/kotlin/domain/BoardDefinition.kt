@@ -13,4 +13,9 @@ class BoardDefinition(
         return columns
     }
 
+    override fun toString(): String {
+        val rowsStr = rows.joinToString(separator = "\n") { it.getValues().toString() }
+        val columnsStr = columns.joinToString(separator = "\n") { it.getValues().toString() }
+        return "$rowsStr\n\n$columnsStr"
+    }
 }
