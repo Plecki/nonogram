@@ -1,6 +1,7 @@
 package com.example.nonogram.desktop
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -44,7 +45,7 @@ class DesktopPresentation : NonogramPresentation {
         Window(
             onCloseRequest = onExit,
             title = "Nonogram",
-            state = rememberWindowState(width = 300.dp, height = 300.dp)
+            state = rememberWindowState(width = 400.dp, height = 400.dp),
         ) {
             createWindowScope()
         }
@@ -59,7 +60,7 @@ class DesktopPresentation : NonogramPresentation {
             }
             Row {
                 showRowDefinitions(boardDefinition.getRows())
-                sampleCard()
+                showNonogramGrid(boardDefinition.getColumns().size, boardDefinition.getRows().size)
             }
         }
     }
@@ -82,13 +83,12 @@ class DesktopPresentation : NonogramPresentation {
                     modifier = Modifier.padding(16.dp),
                 ) {
                     items(columnDefinitions[colIndex].getValues()) { columnDefinitionValue ->
-                        cell(columnDefinitionValue)
+                        definitionValueCell(columnDefinitionValue)
                     }
                 }
             }
         }
     }
-
 
     @Composable
     private fun showRowDefinitions(rowDefinitions: List<LineDefinition>) {
@@ -101,7 +101,7 @@ class DesktopPresentation : NonogramPresentation {
                     modifier = Modifier.padding(16.dp),
                 ) {
                     items(rowDefinitions[rowIndex].getValues()) { rowDefinitionValue ->
-                        cell(rowDefinitionValue)
+                        definitionValueCell(rowDefinitionValue)
                     }
                 }
             }
@@ -109,9 +109,36 @@ class DesktopPresentation : NonogramPresentation {
     }
 
     @Composable
-    private fun cell(value: Int?) {
+    private fun definitionValueCell(value: Int?) {
         Card(backgroundColor = Color.LightGray) {
             Text("$value")
+        }
+    }
+
+    @Composable
+    private fun showNonogramGrid(columnSize: Int, rowsSize: Int) {
+        LazyRow(
+            modifier = Modifier.padding(16.dp),
+        ) {
+            items(columnSize) { columnIndex ->
+                LazyColumn(
+                    modifier = Modifier.padding(16.dp),
+                ) {
+                    items(rowsSize) { rowIndex ->
+                        nonogramCell(rowIndex, columnIndex)
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun nonogramCell(rowIndex: Int, columnIndex: Int) {
+        Card(
+            border = BorderStroke(1.dp, Color.Black),
+            backgroundColor = Color.LightGray
+        ) {
+            Text("($rowIndex,$columnIndex)")
         }
     }
 
