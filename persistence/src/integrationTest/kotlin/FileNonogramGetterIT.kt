@@ -16,15 +16,15 @@ class FileNonogramGetterIT : ShouldSpec({
         // then
         val rows = nonogramBoardDefinition.getRows()
         rows.size shouldBe 3
-        rows[0].getValues() shouldBe listOf(2)
-        rows[1].getValues() shouldBe listOf(1, 3)
-        rows[2].getValues() shouldBe listOf(1, 1)
+        rows[0].values shouldBe listOf(2)
+        rows[1].values shouldBe listOf(1, 3)
+        rows[2].values shouldBe listOf(1, 1)
 
         val cols = nonogramBoardDefinition.getColumns()
         cols.size shouldBe 4
-        cols[0].getValues() shouldBe listOf(4)
-        cols[1].getValues() shouldBe listOf(2, 3, 3)
-        cols[2].getValues() shouldBe listOf(1, 5)
-        cols[3].getValues() shouldBe listOf(2, 1)
+        cols[0].values shouldBe listOf(4)
+        cols[1].values shouldBe listOf(2, 3, 3)
+        cols[2].values shouldBe listOf(1, 5)
+        cols[3].values shouldBe listOf(2, 1)
     }
 })

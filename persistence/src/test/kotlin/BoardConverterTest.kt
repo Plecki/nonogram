@@ -28,11 +28,11 @@ class BoardConverterTest : ShouldSpec({
         // then
         val rows = board.getRows()
         rows.size shouldBe 1
-        rows[0].getValues() shouldBe listOf(1)
+        rows[0].values shouldBe listOf(1)
 
         val columns = board.getColumns()
         columns.size shouldBe 1
-        columns[0].getValues() shouldBe listOf(1)
+        columns[0].values shouldBe listOf(1)
     }
 
     should("convert a board with multiple rows and columns with one value each") {
@@ -51,16 +51,16 @@ class BoardConverterTest : ShouldSpec({
         // then
         val rows = board.getRows()
         rows.size shouldBe 3
-        rows[0].getValues() shouldBe listOf(2)
-        rows[1].getValues() shouldBe listOf(2)
-        rows[2].getValues() shouldBe listOf(1)
+        rows[0].values shouldBe listOf(2)
+        rows[1].values shouldBe listOf(2)
+        rows[2].values shouldBe listOf(1)
 
         val columns = board.getColumns()
         columns.size shouldBe 4
-        columns[0].getValues() shouldBe listOf(1)
-        columns[1].getValues() shouldBe listOf(1)
-        columns[2].getValues() shouldBe listOf(1)
-        columns[3].getValues() shouldBe listOf(2)
+        columns[0].values shouldBe listOf(1)
+        columns[1].values shouldBe listOf(1)
+        columns[2].values shouldBe listOf(1)
+        columns[3].values shouldBe listOf(2)
     }
 
     should("convert a board with multiple rows and columns with multiple value each") {
@@ -79,12 +79,12 @@ class BoardConverterTest : ShouldSpec({
         // then
         val rows = board.getRows()
         rows.size shouldBe 2
-        rows[0].getValues() shouldBe listOf(2, 3, 5)
-        rows[1].getValues() shouldBe listOf(2, 27)
+        rows[0].values shouldBe listOf(2, 3, 5)
+        rows[1].values shouldBe listOf(2, 27)
 
         val columns = board.getColumns()
         columns.size shouldBe 2
-        columns[0].getValues() shouldBe listOf(1, 4, 1)
-        columns[1].getValues() shouldBe listOf(23, 53)
+        columns[0].values shouldBe listOf(1, 4, 1)
+        columns[1].values shouldBe listOf(23, 53)
     }
 })

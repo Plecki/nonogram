@@ -82,7 +82,7 @@ class DesktopPresentation : NonogramPresentation {
                 LazyColumn(
                     modifier = Modifier.padding(16.dp),
                 ) {
-                    items(columnDefinitions[colIndex].getValues()) { columnDefinitionValue ->
+                    items(columnDefinitions[colIndex].values) { columnDefinitionValue ->
                         definitionValueCell(columnDefinitionValue)
                     }
                 }
@@ -100,7 +100,7 @@ class DesktopPresentation : NonogramPresentation {
                 LazyRow(
                     modifier = Modifier.padding(16.dp),
                 ) {
-                    items(rowDefinitions[rowIndex].getValues()) { rowDefinitionValue ->
+                    items(rowDefinitions[rowIndex].values) { rowDefinitionValue ->
                         definitionValueCell(rowDefinitionValue)
                     }
                 }

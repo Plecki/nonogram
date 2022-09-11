@@ -14,13 +14,13 @@ class TerminalPresentation : NonogramPresentation {
 
         val columnsToPresent: String =
             nonogram.getColumns()
-                .map { it.getValues()[0] }
+                .map { it.values[0] }
                 .map { it.toString() }
                 .joinToString(separator = " ")
 
         val rowsToPresent: String =
             nonogram.getRows()
-                .map { it.getValues()[0] }
+                .map { it.values[0] }
                 .map { it.toString() }
                 .joinToString(separator = "\n")
 

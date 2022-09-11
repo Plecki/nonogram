@@ -12,12 +12,12 @@ class LineDefinitionConverterTest : ShouldSpec({
     }
 
     should("convert line with a number") {
-        LineDefinitionConverter().convert("7").getValues() shouldBe listOf(7)
-        LineDefinitionConverter().convert("84").getValues() shouldBe listOf(84)
+        LineDefinitionConverter().convert("7").values shouldBe listOf(7)
+        LineDefinitionConverter().convert("84").values shouldBe listOf(84)
     }
 
     should("convert line with multiple numbers") {
-        LineDefinitionConverter().convert("7 91 3").getValues() shouldBe listOf(7, 91, 3)
+        LineDefinitionConverter().convert("7 91 3").values shouldBe listOf(7, 91, 3)
     }
 
     should("throw exception when there are empty lines") {
@@ -34,8 +34,8 @@ class LineDefinitionConverterTest : ShouldSpec({
         val lineDefinitions = LineDefinitionConverter().convert(listOf("37", "15", "1"))
 
         lineDefinitions.size shouldBe 3
-        lineDefinitions[0].getValues() shouldBe listOf(37)
-        lineDefinitions[1].getValues() shouldBe listOf(15)
-        lineDefinitions[2].getValues() shouldBe listOf(1)
+        lineDefinitions[0].values shouldBe listOf(37)
+        lineDefinitions[1].values shouldBe listOf(15)
+        lineDefinitions[2].values shouldBe listOf(1)
     }
 })
