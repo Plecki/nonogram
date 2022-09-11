@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import domain.BoardDefinition
-import domain.LineDefinition
+import domain.definition.BoardDefinition
+import domain.definition.LineDefinition
 import port.presentation.NonogramPresentation
 
 class DesktopPresentation : NonogramPresentation {

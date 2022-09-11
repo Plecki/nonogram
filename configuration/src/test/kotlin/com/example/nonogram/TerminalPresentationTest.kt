@@ -1,8 +1,8 @@
 package com.example.nonogram
 
 import com.example.nonogram.terminal.TerminalPresentation
-import domain.BoardDefinition
-import domain.LineDefinition
+import domain.definition.BoardDefinition
+import domain.definition.LineDefinition
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe
 

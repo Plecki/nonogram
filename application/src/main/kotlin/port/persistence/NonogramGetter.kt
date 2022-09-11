@@ -1,6 +1,6 @@
 package port.persistence
 
-import domain.BoardDefinition
+import domain.definition.BoardDefinition
 
 interface NonogramGetter {
 

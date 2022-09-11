@@ -1,4 +1,4 @@
-import domain.BoardDefinition
+import domain.definition.BoardDefinition
 import port.persistence.NonogramGetter
 import java.io.File
 import java.io.FileReader

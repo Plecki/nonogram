@@ -1,6 +1,6 @@
 package port.presentation
 
-import domain.BoardDefinition
+import domain.definition.BoardDefinition
 
 interface NonogramPresentation {
 

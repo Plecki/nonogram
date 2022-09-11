@@ -1,6 +1,6 @@
 package usecase
 
-import domain.BoardDefinition
+import domain.definition.BoardDefinition
 
 interface GetBoardUseCase {
 

@@ -1,4 +1,4 @@
-package domain
+package domain.definition
 
 data class BoardDefinition(
     val rows: List<LineDefinition>,

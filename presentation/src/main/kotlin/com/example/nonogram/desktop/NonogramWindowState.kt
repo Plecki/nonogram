@@ -1,6 +1,6 @@
 package com.example.nonogram.desktop
 
-import domain.BoardDefinition
+import domain.definition.BoardDefinition
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import usecase.GetBoardUseCase

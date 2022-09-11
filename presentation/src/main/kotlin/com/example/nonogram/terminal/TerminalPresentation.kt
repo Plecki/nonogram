@@ -1,6 +1,6 @@
 package com.example.nonogram.terminal
 
-import domain.BoardDefinition
+import domain.definition.BoardDefinition
 import port.presentation.NonogramPresentation
 
 class TerminalPresentation : NonogramPresentation {
