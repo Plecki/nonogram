@@ -57,7 +57,7 @@ class DesktopPresentation : NonogramPresentation {
                 showColumnDefinitions(boardDefinition)
             }
             Row {
-                sampleCard()
+                showRowDefinitions(boardDefinition)
                 sampleCard()
             }
         }
@@ -82,6 +82,25 @@ class DesktopPresentation : NonogramPresentation {
                 ) {
                     items(boardDefinition.getColumns()[colIndex].getValues()) { columnDefinitionValue ->
                         cell(columnDefinitionValue)
+                    }
+                }
+            }
+        }
+    }
+
+
+    @Composable
+    private fun showRowDefinitions(boardDefinition: BoardDefinition) {
+        LazyColumn(
+            modifier = Modifier.padding(16.dp),
+            horizontalAlignment = Alignment.End,
+        ) {
+            items(boardDefinition.getRows().size) { rowIndex ->
+                LazyRow(
+                    modifier = Modifier.padding(16.dp),
+                ) {
+                    items(boardDefinition.getRows()[rowIndex].getValues()) { rowDefinitionValue ->
+                        cell(rowDefinitionValue)
                     }
                 }
             }
