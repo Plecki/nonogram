@@ -49,7 +49,6 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
     private fun createWindow(boardDefinition: BoardDefinition, boardState: BoardState) {
         application {
             window(::exitApplication, boardDefinition, boardState)
-            createApplicationHandles()
         }
     }
 
@@ -151,7 +150,7 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
         Button(
             border = BorderStroke(1.dp, Color.Black),
             colors = ButtonDefaults.buttonColors(backgroundColor = if (cellState.state) Color.Green else Color.Red),
-            onClick = { updateCellStateUseCase.updateWith(CellPosition(rowIndex, columnIndex), CellState(true)) },
+            onClick = { cellClicked(rowIndex, columnIndex) },
             // TODO got to remember the state
         ) {
             Text("($rowIndex,$columnIndex)")
@@ -163,7 +162,7 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
         Board(boardDefinition, boardState)
     }
 
-    private fun createApplicationHandles() {
-//        nonogramWindowState.initialize()
+    private fun cellClicked(rowIndex: Int, columnIndex: Int) {
+        updateCellStateUseCase.updateWith(CellPosition(rowIndex, columnIndex), CellState(true))
     }
 }
