@@ -56,11 +56,11 @@ class DesktopPresentation : NonogramPresentation {
         Column {
             Row {
                 sampleCard()
-                showColumnDefinitions(boardDefinition.getColumns())
+                showColumnDefinitions(boardDefinition.columns)
             }
             Row {
-                showRowDefinitions(boardDefinition.getRows())
-                showNonogramGrid(boardDefinition.getColumns().size, boardDefinition.getRows().size)
+                showRowDefinitions(boardDefinition.rows)
+                showNonogramGrid(boardDefinition.columns.size, boardDefinition.rows.size)
             }
         }
     }

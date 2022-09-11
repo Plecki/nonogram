@@ -26,11 +26,11 @@ class BoardConverterTest : ShouldSpec({
         )
 
         // then
-        val rows = board.getRows()
+        val rows = board.rows
         rows.size shouldBe 1
         rows[0].values shouldBe listOf(1)
 
-        val columns = board.getColumns()
+        val columns = board.columns
         columns.size shouldBe 1
         columns[0].values shouldBe listOf(1)
     }
@@ -49,13 +49,13 @@ class BoardConverterTest : ShouldSpec({
         )
 
         // then
-        val rows = board.getRows()
+        val rows = board.rows
         rows.size shouldBe 3
         rows[0].values shouldBe listOf(2)
         rows[1].values shouldBe listOf(2)
         rows[2].values shouldBe listOf(1)
 
-        val columns = board.getColumns()
+        val columns = board.columns
         columns.size shouldBe 4
         columns[0].values shouldBe listOf(1)
         columns[1].values shouldBe listOf(1)
@@ -77,12 +77,12 @@ class BoardConverterTest : ShouldSpec({
         )
 
         // then
-        val rows = board.getRows()
+        val rows = board.rows
         rows.size shouldBe 2
         rows[0].values shouldBe listOf(2, 3, 5)
         rows[1].values shouldBe listOf(2, 27)
 
-        val columns = board.getColumns()
+        val columns = board.columns
         columns.size shouldBe 2
         columns[0].values shouldBe listOf(1, 4, 1)
         columns[1].values shouldBe listOf(23, 53)
