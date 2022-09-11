@@ -1,15 +1,22 @@
 package usecase
 
-import domain.state.ArrayBoardState
+import domain.BoardWithState
 import domain.state.BoardState
 import domain.state.CellPosition
 import domain.state.CellState
-import java.util.*
+import mu.KotlinLogging
+import port.persistence.NonogramPersistence
 
-class UpdateCellStateUseCaseImpl : UpdateCellStateUseCase {
+class UpdateCellStateUseCaseImpl(
+    private val nonogramPersistence: NonogramPersistence
+) : UpdateCellStateUseCase {
+    private val logger = KotlinLogging.logger {}
+
     override fun updateWith(cellPosition: CellPosition, cellState: CellState): BoardState {
-        // TODO really update state
-        return ArrayBoardState.createEmpty(5, 5)
-            .withUpdatedCell(CellPosition(Random().nextInt(3), Random().nextInt(3)), CellState(true))
+        val activeBoard: BoardWithState = nonogramPersistence.getActiveBoard()
+        val boardStateWithUpdatedCell = activeBoard.boardState.withUpdatedCell(cellPosition, cellState)
+        logger.info { "Updating board with $boardStateWithUpdatedCell" }
+        nonogramPersistence.updateCurrentState(boardStateWithUpdatedCell)
+        return boardStateWithUpdatedCell
     }
 }

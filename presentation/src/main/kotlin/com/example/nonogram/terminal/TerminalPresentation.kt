@@ -1,12 +1,13 @@
 package com.example.nonogram.terminal
 
+import domain.BoardWithState
 import domain.definition.BoardDefinition
 import port.presentation.NonogramPresentation
 
 class TerminalPresentation : NonogramPresentation {
-    override fun present(nonogram: BoardDefinition) {
+    override fun present(boardWithState: BoardWithState) {
         println("TerminalPresentation presents:")
-        println(createBoardToPresent(nonogram))
+        println(createBoardToPresent(boardWithState.boardDefinition))
     }
 
     fun createBoardToPresent(nonogram: BoardDefinition): String {

@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import domain.BoardWithState
 import domain.definition.BoardDefinition
 import domain.definition.LineDefinition
 import domain.state.BoardState
@@ -31,42 +32,40 @@ import domain.state.CellState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import port.presentation.NonogramPresentation
-import usecase.GetBoardStateUseCase
 import usecase.UpdateCellStateUseCase
 
 class DesktopPresentation : NonogramPresentation, KoinComponent {
 
-    private val getBoardStateUseCase by inject<GetBoardStateUseCase>()
     private val updateCellStateUseCase by inject<UpdateCellStateUseCase>()
 
     private lateinit var boardState: MutableState<BoardState>
 
-    override fun present(nonogram: BoardDefinition) {
-        createWindow(nonogram)
+    override fun present(boardWithState: BoardWithState) {
+        createWindow(boardWithState)
         println("window created")
     }
 
     @Preview
-    private fun createWindow(boardDefinition: BoardDefinition) {
+    private fun createWindow(boardWithState: BoardWithState) {
         application {
-            window(::exitApplication, boardDefinition)
+            window(::exitApplication, boardWithState)
         }
     }
 
     @Preview
     @Composable
-    private fun window(onExit: () -> Unit, boardDefinition: BoardDefinition) {
+    private fun window(onExit: () -> Unit, boardWithState: BoardWithState) {
         Window(
             onCloseRequest = onExit,
             title = "Nonogram",
             state = rememberWindowState(width = 600.dp, height = 400.dp),
         ) {
-            createWindowScope(boardDefinition)
+            createWindowScope(boardWithState)
         }
     }
 
     @Composable
-    fun Board(boardDefinition: BoardDefinition, boardState: BoardState) {
+    fun Board(boardDefinition: BoardDefinition, boardState: MutableState<BoardState>) {
         Column {
             Row {
                 sampleCard()
@@ -130,7 +129,7 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
     }
 
     @Composable
-    private fun showNonogramGrid(boardState: BoardState, columnSize: Int, rowsSize: Int) {
+    private fun showNonogramGrid(boardState: MutableState<BoardState>, columnSize: Int, rowsSize: Int) {
         LazyRow(
             modifier = Modifier.padding(16.dp),
         ) {
@@ -139,7 +138,7 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
                     modifier = Modifier.padding(16.dp),
                 ) {
                     items(rowsSize) { rowIndex ->
-                        nonogramCell(boardState.getStateOf(rowIndex, columnIndex), rowIndex, columnIndex)
+                        nonogramCell(boardState.value.getStateOf(rowIndex, columnIndex), rowIndex, columnIndex)
                     }
                 }
             }
@@ -158,10 +157,9 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
     }
 
     @Composable
-    private fun createWindowScope(boardDefinition: BoardDefinition) {
-        val initialBoardState = getBoardStateUseCase.getBoardState()
-        boardState = remember { mutableStateOf(initialBoardState) }
-        Board(boardDefinition, boardState.value)
+    private fun createWindowScope(boardWithState: BoardWithState) {
+        boardState = remember { mutableStateOf(boardWithState.boardState) }
+        Board(boardWithState.boardDefinition, boardState)
     }
 
     private fun cellClicked(rowIndex: Int, columnIndex: Int) {
