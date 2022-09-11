@@ -2,11 +2,7 @@ package com.example.nonogram
 
 import BoardDefinitionConverter
 import FileNonogramGetter
-import GetBoardUseCase
-import GetBoardUseCaseImpl
 import LineDefinitionConverter
-import NonogramPresentationUseCase
-import NonogramPresentationUseCaseImpl
 import RowColSplitter
 import com.example.nonogram.desktop.DesktopPresentation
 import org.koin.core.component.KoinComponent
@@ -16,6 +12,10 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import port.persistence.NonogramGetter
 import port.presentation.NonogramPresentation
+import usecase.GetBoardUseCase
+import usecase.GetBoardUseCaseImpl
+import usecase.NonogramPresentationUseCase
+import usecase.NonogramPresentationUseCaseImpl
 
 class NonogramApplication : KoinComponent {
     private val nonogramPresentationUseCase by inject<NonogramPresentationUseCase>()

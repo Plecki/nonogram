@@ -1,3 +1,5 @@
+package usecase
+
 import domain.BoardDefinition
 import port.persistence.NonogramGetter
 

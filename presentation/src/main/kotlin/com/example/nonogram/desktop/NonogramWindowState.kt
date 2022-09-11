@@ -1,9 +1,9 @@
 package com.example.nonogram.desktop
 
-import GetBoardUseCase
 import domain.BoardDefinition
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import usecase.GetBoardUseCase
 
 class NonogramWindowState : KoinComponent {
 
