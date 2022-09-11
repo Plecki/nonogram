@@ -13,6 +13,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,19 +30,16 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import port.presentation.NonogramPresentation
 import usecase.GetBoardStateUseCase
-import usecase.GetBoardUseCase
 import usecase.UpdateCellStateUseCase
 
 class DesktopPresentation : NonogramPresentation, KoinComponent {
 
-    private val getBoardUseCase by inject<GetBoardUseCase>()
     private val getBoardStateUseCase by inject<GetBoardStateUseCase>()
     private val updateCellStateUseCase by inject<UpdateCellStateUseCase>()
 
     override fun present(nonogram: BoardDefinition) {
-        val boardDefinition = getBoardUseCase.getBoard()
         val boardState = getBoardStateUseCase.getBoardState()
-        createWindow(boardDefinition, boardState)
+        createWindow(nonogram, boardState)
         println("window created")
     }
 
@@ -58,7 +56,7 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
         Window(
             onCloseRequest = onExit,
             title = "Nonogram",
-            state = rememberWindowState(width = 400.dp, height = 400.dp),
+            state = rememberWindowState(width = 600.dp, height = 400.dp),
         ) {
             createWindowScope(boardDefinition, boardState)
         }
