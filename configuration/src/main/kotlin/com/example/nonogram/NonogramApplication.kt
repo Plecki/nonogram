@@ -12,10 +12,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import port.persistence.NonogramGetter
 import port.presentation.NonogramPresentation
-import usecase.GetBoardUseCase
-import usecase.GetBoardUseCaseImpl
-import usecase.NonogramPresentationUseCase
-import usecase.NonogramPresentationUseCaseImpl
+import usecase.*
 
 class NonogramApplication : KoinComponent {
     private val nonogramPresentationUseCase by inject<NonogramPresentationUseCase>()
@@ -29,6 +26,7 @@ class NonogramApplication : KoinComponent {
             single { FileNonogramGetter("simple-nonogram.txt", get()) as NonogramGetter }
             single { NonogramPresentationUseCaseImpl(get(), get()) as NonogramPresentationUseCase }
             single { GetBoardUseCaseImpl(get()) as GetBoardUseCase }
+            single { GetBoardStateUseCaseImpl() as GetBoardStateUseCase }
         }
 
         @JvmStatic

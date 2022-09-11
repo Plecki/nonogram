@@ -20,39 +20,48 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import domain.definition.BoardDefinition
 import domain.definition.LineDefinition
+import domain.state.BoardState
+import domain.state.CellState
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import port.presentation.NonogramPresentation
+import usecase.GetBoardStateUseCase
+import usecase.GetBoardUseCase
 
-class DesktopPresentation : NonogramPresentation {
-    private lateinit var nonogramWindowState: NonogramWindowState
+class DesktopPresentation : NonogramPresentation, KoinComponent {
+
+    private val getBoardUseCase by inject<GetBoardUseCase>()
+    private val getBoardStateUseCase by inject<GetBoardStateUseCase>()
 
     override fun present(nonogram: BoardDefinition) {
-        createWindow()
+        val boardDefinition = getBoardUseCase.getBoard()
+        val boardState = getBoardStateUseCase.getBoardState()
+        createWindow(boardDefinition, boardState)
         println("window created")
     }
 
     @Preview
-    private fun createWindow() {
+    private fun createWindow(boardDefinition: BoardDefinition, boardState: BoardState) {
         application {
-            window(::exitApplication)
-            nonogramWindowState = NonogramWindowState()
+            window(::exitApplication, boardDefinition, boardState)
             createApplicationHandles()
         }
     }
 
     @Preview
     @Composable
-    private fun window(onExit: () -> Unit) {
+    private fun window(onExit: () -> Unit, boardDefinition: BoardDefinition, boardState: BoardState) {
         Window(
             onCloseRequest = onExit,
             title = "Nonogram",
             state = rememberWindowState(width = 400.dp, height = 400.dp),
         ) {
-            createWindowScope()
+            createWindowScope(boardDefinition, boardState)
         }
     }
 
     @Composable
-    fun Board(boardDefinition: BoardDefinition) {
+    fun Board(boardDefinition: BoardDefinition, boardState: BoardState) {
         Column {
             Row {
                 sampleCard()
@@ -60,7 +69,7 @@ class DesktopPresentation : NonogramPresentation {
             }
             Row {
                 showRowDefinitions(boardDefinition.rows)
-                showNonogramGrid(boardDefinition.columns.size, boardDefinition.rows.size)
+                showNonogramGrid(boardState, boardDefinition.columns.size, boardDefinition.rows.size)
             }
         }
     }
@@ -116,7 +125,7 @@ class DesktopPresentation : NonogramPresentation {
     }
 
     @Composable
-    private fun showNonogramGrid(columnSize: Int, rowsSize: Int) {
+    private fun showNonogramGrid(boardState: BoardState, columnSize: Int, rowsSize: Int) {
         LazyRow(
             modifier = Modifier.padding(16.dp),
         ) {
@@ -125,7 +134,7 @@ class DesktopPresentation : NonogramPresentation {
                     modifier = Modifier.padding(16.dp),
                 ) {
                     items(rowsSize) { rowIndex ->
-                        nonogramCell(rowIndex, columnIndex)
+                        nonogramCell(boardState.getStateOf(rowIndex, columnIndex), rowIndex, columnIndex)
                     }
                 }
             }
@@ -133,21 +142,21 @@ class DesktopPresentation : NonogramPresentation {
     }
 
     @Composable
-    private fun nonogramCell(rowIndex: Int, columnIndex: Int) {
+    private fun nonogramCell(cellState: CellState, rowIndex: Int, columnIndex: Int) {
         Card(
             border = BorderStroke(1.dp, Color.Black),
-            backgroundColor = Color.LightGray
+            backgroundColor = if (cellState.state) Color.Green else Color.Red
         ) {
             Text("($rowIndex,$columnIndex)")
         }
     }
 
     @Composable
-    private fun createWindowScope() {
-        Board(nonogramWindowState.boardDefinition)
+    private fun createWindowScope(boardDefinition: BoardDefinition, boardState: BoardState) {
+        Board(boardDefinition, boardState)
     }
 
     private fun createApplicationHandles() {
-        nonogramWindowState.initialize()
+//        nonogramWindowState.initialize()
     }
 }

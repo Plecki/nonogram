@@ -21,7 +21,7 @@ class ArrayBoardStateTest : ShouldSpec({
     }
 
     should("require cell position actually in board") {
-        val arrayBoardState = createBoardState(2, 1)
+        val arrayBoardState = ArrayBoardState.createEmpty(2, 1)
 
         shouldThrow<IllegalArgumentException> { arrayBoardState.withUpdatedCell(CellPosition(-1, 0), CellState(true)) }
         shouldThrow<IllegalArgumentException> { arrayBoardState.withUpdatedCell(CellPosition(0, -1), CellState(true)) }
@@ -33,7 +33,7 @@ class ArrayBoardStateTest : ShouldSpec({
     }
 
     should("update state only if it changes") {
-        val arrayBoardState = createBoardState(2, 1)
+        val arrayBoardState = ArrayBoardState.createEmpty(2, 1)
 
         shouldThrow<IllegalArgumentException> {
             arrayBoardState.withUpdatedCell(
@@ -52,7 +52,7 @@ class ArrayBoardStateTest : ShouldSpec({
     }
 
     should("update state of cell") {
-        val arrayBoardState = createBoardState(2, 2)
+        val arrayBoardState = ArrayBoardState.createEmpty(2, 2)
 
         val boardWithUpdatedCell = arrayBoardState.withUpdatedCell(CellPosition(1, 0), CellState(true))
 
@@ -62,9 +62,3 @@ class ArrayBoardStateTest : ShouldSpec({
         boardWithUpdatedCell.getStateOf(1, 1) shouldBe CellState(false)
     }
 })
-
-private fun createBoardState(numberOfRows: Int, numberOfColumns: Int): ArrayBoardState {
-    val row = List(numberOfColumns) { CellState(false) }
-    val state = List(numberOfRows) { row }
-    return ArrayBoardState(state)
-}

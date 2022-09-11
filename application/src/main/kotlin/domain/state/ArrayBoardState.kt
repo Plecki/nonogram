@@ -13,6 +13,14 @@ data class ArrayBoardState(
         }
     }
 
+    companion object {
+        fun createEmpty(numberOfRows: Int, numberOfColumns: Int): ArrayBoardState {
+            val row = List(numberOfColumns) { CellState(false) }
+            val state = List(numberOfRows) { row }
+            return ArrayBoardState(state)
+        }
+    }
+
     override fun getStateOf(rowId: Int, columnId: Int): CellState {
         return state[rowId][columnId]
     }
