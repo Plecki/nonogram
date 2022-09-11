@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,17 +23,20 @@ import androidx.compose.ui.window.rememberWindowState
 import domain.definition.BoardDefinition
 import domain.definition.LineDefinition
 import domain.state.BoardState
+import domain.state.CellPosition
 import domain.state.CellState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import port.presentation.NonogramPresentation
 import usecase.GetBoardStateUseCase
 import usecase.GetBoardUseCase
+import usecase.UpdateCellStateUseCase
 
 class DesktopPresentation : NonogramPresentation, KoinComponent {
 
     private val getBoardUseCase by inject<GetBoardUseCase>()
     private val getBoardStateUseCase by inject<GetBoardStateUseCase>()
+    private val updateCellStateUseCase by inject<UpdateCellStateUseCase>()
 
     override fun present(nonogram: BoardDefinition) {
         val boardDefinition = getBoardUseCase.getBoard()
@@ -143,9 +148,11 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
 
     @Composable
     private fun nonogramCell(cellState: CellState, rowIndex: Int, columnIndex: Int) {
-        Card(
+        Button(
             border = BorderStroke(1.dp, Color.Black),
-            backgroundColor = if (cellState.state) Color.Green else Color.Red
+            colors = ButtonDefaults.buttonColors(backgroundColor = if (cellState.state) Color.Green else Color.Red),
+            onClick = { updateCellStateUseCase.updateWith(CellPosition(rowIndex, columnIndex), CellState(true)) },
+            // TODO got to remember the state
         ) {
             Text("($rowIndex,$columnIndex)")
         }

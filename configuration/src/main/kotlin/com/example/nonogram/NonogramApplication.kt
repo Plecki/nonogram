@@ -27,6 +27,7 @@ class NonogramApplication : KoinComponent {
             single { NonogramPresentationUseCaseImpl(get(), get()) as NonogramPresentationUseCase }
             single { GetBoardUseCaseImpl(get()) as GetBoardUseCase }
             single { GetBoardStateUseCaseImpl() as GetBoardStateUseCase }
+            single { UpdateCellStateUseCaseImpl() as UpdateCellStateUseCase }
         }
 
         @JvmStatic
