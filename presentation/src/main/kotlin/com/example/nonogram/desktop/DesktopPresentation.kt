@@ -18,6 +18,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import domain.BoardDefinition
+import domain.LineDefinition
 import port.presentation.NonogramPresentation
 
 class DesktopPresentation : NonogramPresentation {
@@ -54,10 +55,10 @@ class DesktopPresentation : NonogramPresentation {
         Column {
             Row {
                 sampleCard()
-                showColumnDefinitions(boardDefinition)
+                showColumnDefinitions(boardDefinition.getColumns())
             }
             Row {
-                showRowDefinitions(boardDefinition)
+                showRowDefinitions(boardDefinition.getRows())
                 sampleCard()
             }
         }
@@ -71,16 +72,16 @@ class DesktopPresentation : NonogramPresentation {
     }
 
     @Composable
-    private fun showColumnDefinitions(boardDefinition: BoardDefinition) {
+    private fun showColumnDefinitions(columnDefinitions: List<LineDefinition>) {
         LazyRow(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.Bottom,
         ) {
-            items(boardDefinition.getColumns().size) { colIndex ->
+            items(columnDefinitions.size) { colIndex ->
                 LazyColumn(
                     modifier = Modifier.padding(16.dp),
                 ) {
-                    items(boardDefinition.getColumns()[colIndex].getValues()) { columnDefinitionValue ->
+                    items(columnDefinitions[colIndex].getValues()) { columnDefinitionValue ->
                         cell(columnDefinitionValue)
                     }
                 }
@@ -90,16 +91,16 @@ class DesktopPresentation : NonogramPresentation {
 
 
     @Composable
-    private fun showRowDefinitions(boardDefinition: BoardDefinition) {
+    private fun showRowDefinitions(rowDefinitions: List<LineDefinition>) {
         LazyColumn(
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.End,
         ) {
-            items(boardDefinition.getRows().size) { rowIndex ->
+            items(rowDefinitions.size) { rowIndex ->
                 LazyRow(
                     modifier = Modifier.padding(16.dp),
                 ) {
-                    items(boardDefinition.getRows()[rowIndex].getValues()) { rowDefinitionValue ->
+                    items(rowDefinitions[rowIndex].getValues()) { rowDefinitionValue ->
                         cell(rowDefinitionValue)
                     }
                 }
