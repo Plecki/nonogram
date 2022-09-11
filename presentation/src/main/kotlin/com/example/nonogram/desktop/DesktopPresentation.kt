@@ -13,6 +13,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,28 +39,29 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
     private val getBoardStateUseCase by inject<GetBoardStateUseCase>()
     private val updateCellStateUseCase by inject<UpdateCellStateUseCase>()
 
+    private lateinit var boardState: MutableState<BoardState>
+
     override fun present(nonogram: BoardDefinition) {
-        val boardState = getBoardStateUseCase.getBoardState()
-        createWindow(nonogram, boardState)
+        createWindow(nonogram)
         println("window created")
     }
 
     @Preview
-    private fun createWindow(boardDefinition: BoardDefinition, boardState: BoardState) {
+    private fun createWindow(boardDefinition: BoardDefinition) {
         application {
-            window(::exitApplication, boardDefinition, boardState)
+            window(::exitApplication, boardDefinition)
         }
     }
 
     @Preview
     @Composable
-    private fun window(onExit: () -> Unit, boardDefinition: BoardDefinition, boardState: BoardState) {
+    private fun window(onExit: () -> Unit, boardDefinition: BoardDefinition) {
         Window(
             onCloseRequest = onExit,
             title = "Nonogram",
             state = rememberWindowState(width = 600.dp, height = 400.dp),
         ) {
-            createWindowScope(boardDefinition, boardState)
+            createWindowScope(boardDefinition)
         }
     }
 
@@ -149,18 +152,20 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
             border = BorderStroke(1.dp, Color.Black),
             colors = ButtonDefaults.buttonColors(backgroundColor = if (cellState.state) Color.Green else Color.Red),
             onClick = { cellClicked(rowIndex, columnIndex) },
-            // TODO got to remember the state
         ) {
             Text("($rowIndex,$columnIndex)")
         }
     }
 
     @Composable
-    private fun createWindowScope(boardDefinition: BoardDefinition, boardState: BoardState) {
-        Board(boardDefinition, boardState)
+    private fun createWindowScope(boardDefinition: BoardDefinition) {
+        val initialBoardState = getBoardStateUseCase.getBoardState()
+        boardState = remember { mutableStateOf(initialBoardState) }
+        Board(boardDefinition, boardState.value)
     }
 
     private fun cellClicked(rowIndex: Int, columnIndex: Int) {
-        updateCellStateUseCase.updateWith(CellPosition(rowIndex, columnIndex), CellState(true))
+        val newBoardState = updateCellStateUseCase.updateWith(CellPosition(rowIndex, columnIndex), CellState(true))
+        boardState.value = newBoardState
     }
 }
