@@ -1,12 +1,16 @@
 package com.example.nonogram.desktop
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -47,21 +51,37 @@ class DesktopPresentation : NonogramPresentation {
 
     @Composable
     fun Board(boardDefinition: BoardDefinition) {
-        showColumnDefinitions(boardDefinition)
+        Column {
+            Row {
+                sampleCard()
+                showColumnDefinitions(boardDefinition)
+            }
+            Row {
+                sampleCard()
+                sampleCard()
+            }
+        }
+    }
+
+    @Composable
+    private fun sampleCard() {
+        Card(backgroundColor = Color.Blue) {
+            Text("Something")
+        }
     }
 
     @Composable
     private fun showColumnDefinitions(boardDefinition: BoardDefinition) {
         LazyRow(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.Bottom,
         ) {
             items(boardDefinition.getColumns().size) { colIndex ->
                 LazyColumn(
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(16.dp),
                 ) {
-                    items(calculateMaxColumnValues(boardDefinition)) { rowIndex ->
-                        val value = getColValueInPosition(boardDefinition, colIndex, rowIndex)
-                        cell(value)
+                    items(boardDefinition.getColumns()[colIndex].getValues()) { columnDefinitionValue ->
+                        cell(columnDefinitionValue)
                     }
                 }
             }
@@ -70,26 +90,9 @@ class DesktopPresentation : NonogramPresentation {
 
     @Composable
     private fun cell(value: Int?) {
-        if (value != null) {
-            Card(backgroundColor = Color.LightGray) {
-                Text("$value")
-            }
-        } else {
-            Text("")
+        Card(backgroundColor = Color.LightGray) {
+            Text("$value")
         }
-    }
-
-    private fun calculateMaxColumnValues(boardDefinition: BoardDefinition) = boardDefinition.getColumns()
-        .maxOf { it.getValues().size }
-
-    private fun getColValueInPosition(boardDefinition: BoardDefinition, columnIndex: Int, rowIndex: Int): Int? {
-        val maxColumnValues = calculateMaxColumnValues(boardDefinition)
-        val indexOfValue = maxColumnValues - rowIndex - 1
-
-        val lineDefinition = boardDefinition.getColumns()[columnIndex]
-        if (indexOfValue >= lineDefinition.getValues().size || indexOfValue < 0)
-            return null
-        return lineDefinition.getValues()[indexOfValue]
     }
 
     @Composable
