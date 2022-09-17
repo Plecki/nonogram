@@ -19,6 +19,22 @@ data class ArrayBoardState(
             val state = List(numberOfRows) { row }
             return ArrayBoardState(state)
         }
+
+        fun fromString(state: String, filled: Char = 'X', empty: Char = '-'): ArrayBoardState {
+            return ArrayBoardState(
+                state
+                    .split("\n")
+                    .map {
+                        it.toCharArray()
+                            .map {
+                                when (it) {
+                                    filled -> CellState(true)
+                                    empty -> CellState(false)
+                                    else -> throw IllegalArgumentException()
+                                }
+                            }
+                    })
+        }
     }
 
     override fun getStateOf(rowId: Int, columnId: Int): CellState {

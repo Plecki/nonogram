@@ -20,6 +20,22 @@ class ArrayBoardStateTest : ShouldSpec({
         shouldNotThrowAny { ArrayBoardState(state) }
     }
 
+    should("create 1x1 full state from string") {
+        ArrayBoardState.fromString("X").state shouldBe listOf(listOf(CellState(true)))
+    }
+
+    should("create 1x1 empty state from string") {
+        ArrayBoardState.fromString("-").state shouldBe listOf(listOf(CellState(false)))
+    }
+
+    should("create 2x5 state from string") {
+        ArrayBoardState.fromString("XX--X\nX--X-").state shouldBe
+                listOf(
+                    listOf(CellState(true), CellState(true), CellState(false), CellState(false), CellState(true)),
+                    listOf(CellState(true), CellState(false), CellState(false), CellState(true), CellState(false)),
+                )
+    }
+
     should("require cell position actually in board") {
         val arrayBoardState = ArrayBoardState.createEmpty(2, 1)
 
