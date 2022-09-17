@@ -5,6 +5,7 @@ data class ArrayBoardState(
 ) : BoardState {
 
     init {
+        require(state.isNotEmpty())
         val rowSize = state[0].size
         for (arrayOfCellStates in state) {
             require(arrayOfCellStates.size == rowSize) {
@@ -65,6 +66,10 @@ data class ArrayBoardState(
 
         return this.copy(state = newState)
     }
+
+    override fun numberOfColumns(): Int = state[0].size
+
+    override fun numberOfRows(): Int = state.size
 
     private fun containsPosition(cellPosition: CellPosition): Boolean {
         return cellPosition.getRow() >= 0 && cellPosition.getColumn() >= 0

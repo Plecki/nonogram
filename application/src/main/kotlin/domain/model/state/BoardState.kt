@@ -10,4 +10,8 @@ interface BoardState {
         failIfAlreadySet: Boolean = false
     ): BoardState
 
+    fun numberOfColumns(): Int
+
+    fun numberOfRows(): Int
+
 }
