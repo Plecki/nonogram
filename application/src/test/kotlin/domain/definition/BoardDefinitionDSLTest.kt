@@ -25,7 +25,7 @@ class BoardDefinitionDSLTest : ShouldSpec({
 
     should("create a board with one column") {
         val (rows, columns) = boardDefinition {
-            -column {
+            +column {
                 values = listOf()
             }
         }
@@ -50,10 +50,10 @@ class BoardDefinitionDSLTest : ShouldSpec({
 
     should("create a board with multiple columns") {
         val (rows, columns) = boardDefinition {
-            -column {
+            +column {
                 values = listOf()
             }
-            -column {
+            +column {
                 values = listOf()
             }
         }
@@ -70,10 +70,10 @@ class BoardDefinitionDSLTest : ShouldSpec({
             +row {
                 values = listOf()
             }
-            -column {
+            +column {
                 values = listOf()
             }
-            -column {
+            +column {
                 values = listOf()
             }
         }

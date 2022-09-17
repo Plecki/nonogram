@@ -7,14 +7,17 @@ fun boardDefinition(howToBuild: BoardDefinitionBuilder.() -> Unit): BoardDefinit
     return builder.build()
 }
 
-fun row(howToBuild: LineDefinitionBuilder.() -> Unit): LineDefinition {
+fun row(howToBuild: LineDefinitionBuilder.() -> Unit): RowDefinition {
     val builder = LineDefinitionBuilder()
     howToBuild(builder)
-    return builder.build()
+    return RowDefinition(builder.build())
 }
 
-fun column(howToBuild: LineDefinitionBuilder.() -> Unit): LineDefinition =
-    row(howToBuild)
+fun column(howToBuild: LineDefinitionBuilder.() -> Unit): ColumnDefinition {
+    val builder = LineDefinitionBuilder()
+    howToBuild(builder)
+    return ColumnDefinition(builder.build())
+}
 
 class BoardDefinitionBuilder {
     val rows: MutableList<LineDefinition> = mutableListOf()
@@ -24,13 +27,12 @@ class BoardDefinitionBuilder {
         return BoardDefinition(rows, columns)
     }
 
-    // FIXME plus adds to rows, minus adds to columns
-    operator fun LineDefinition.unaryPlus() {
-        rows.add(this)
+    operator fun RowDefinition.unaryPlus() {
+        rows.add(this.lineDefinition)
     }
 
-    operator fun LineDefinition.unaryMinus() {
-        columns.add(this)
+    operator fun ColumnDefinition.unaryPlus() {
+        columns.add(this.lineDefinition)
     }
 }
 
@@ -41,3 +43,9 @@ class LineDefinitionBuilder {
         return LineDefinition(values)
     }
 }
+
+@JvmInline
+value class RowDefinition(val lineDefinition: LineDefinition)
+
+@JvmInline
+value class ColumnDefinition(val lineDefinition: LineDefinition)
