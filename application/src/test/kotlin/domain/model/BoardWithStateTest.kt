@@ -4,7 +4,6 @@ import domain.model.definition.boardDefinition
 import domain.model.definition.column
 import domain.model.definition.row
 import domain.model.state.ArrayBoardState
-import domain.model.state.CellState
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe
 
@@ -16,7 +15,7 @@ class BoardWithStateTest : ShouldSpec({
                 +row(1)
                 +column(1)
             },
-            ArrayBoardState(listOf(listOf(CellState(false))))
+            ArrayBoardState.fromString("-")
         ).isSolved() shouldBe false
     }
 
@@ -26,7 +25,7 @@ class BoardWithStateTest : ShouldSpec({
                 +row(1)
                 +column(1)
             },
-            ArrayBoardState(listOf(listOf(CellState(true))))
+            ArrayBoardState.fromString("X")
         ).isSolved() shouldBe true
     }
 })
