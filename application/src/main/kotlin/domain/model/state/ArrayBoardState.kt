@@ -21,6 +21,10 @@ data class ArrayBoardState(
         }
     }
 
+    override fun isSolved(): Boolean {
+        return false
+    }
+
     override fun getStateOf(rowId: Int, columnId: Int): CellState {
         return state[rowId][columnId]
     }
