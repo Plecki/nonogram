@@ -21,11 +21,6 @@ data class ArrayBoardState(
         }
     }
 
-    override fun isSolved(): Boolean {
-        val stateOfCell = getStateOf(0, 0).state
-        return stateOfCell
-    }
-
     override fun getStateOf(rowId: Int, columnId: Int): CellState {
         return state[rowId][columnId]
     }

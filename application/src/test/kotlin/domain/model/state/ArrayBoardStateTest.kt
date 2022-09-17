@@ -20,14 +20,6 @@ class ArrayBoardStateTest : ShouldSpec({
         shouldNotThrowAny { ArrayBoardState(state) }
     }
 
-    should("empty 1x1 board is not solved") {
-        ArrayBoardState(listOf(listOf(CellState(false)))).isSolved() shouldBe false
-    }
-
-    should("full 1x1 board is solved") {
-        ArrayBoardState(listOf(listOf(CellState(true)))).isSolved() shouldBe true
-    }
-
     should("require cell position actually in board") {
         val arrayBoardState = ArrayBoardState.createEmpty(2, 1)
 
