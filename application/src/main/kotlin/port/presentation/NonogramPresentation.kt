@@ -1,6 +1,6 @@
 package port.presentation
 
-import domain.BoardWithState
+import domain.model.BoardWithState
 
 interface NonogramPresentation {
 

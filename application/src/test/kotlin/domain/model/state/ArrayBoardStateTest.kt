@@ -1,4 +1,4 @@
-package domain.state
+package domain.model.state
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow

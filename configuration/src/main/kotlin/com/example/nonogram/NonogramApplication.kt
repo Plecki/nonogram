@@ -6,8 +6,8 @@ import InMemoryPersistence
 import LineDefinitionConverter
 import RowColSplitter
 import com.example.nonogram.desktop.DesktopPresentation
-import domain.state.ArrayBoardStateFactory
-import domain.state.BoardStateFactory
+import domain.model.state.ArrayBoardStateFactory
+import domain.model.state.BoardStateFactory
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin

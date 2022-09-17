@@ -1,8 +1,8 @@
 package usecase
 
-import domain.state.BoardState
-import domain.state.CellPosition
-import domain.state.CellState
+import domain.model.state.BoardState
+import domain.model.state.CellPosition
+import domain.model.state.CellState
 
 interface UpdateCellStateUseCase {
 

@@ -1,6 +1,6 @@
 package usecase
 
-import domain.state.BoardState
+import domain.model.state.BoardState
 
 fun interface GetBoardStateUseCase {
 

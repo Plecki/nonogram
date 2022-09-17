@@ -1,4 +1,4 @@
-import domain.definition.BoardDefinition
+import domain.model.definition.BoardDefinition
 
 class BoardDefinitionConverter(
     private val rowColSplitter: RowColSplitter,

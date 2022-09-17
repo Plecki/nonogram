@@ -1,9 +1,9 @@
 package usecase
 
-import domain.BoardWithState
-import domain.state.BoardState
-import domain.state.CellPosition
-import domain.state.CellState
+import domain.model.BoardWithState
+import domain.model.state.BoardState
+import domain.model.state.CellPosition
+import domain.model.state.CellState
 import mu.KotlinLogging
 import port.persistence.NonogramPersistence
 

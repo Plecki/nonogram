@@ -1,4 +1,4 @@
-package domain.definition
+package domain.model.definition
 
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe

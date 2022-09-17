@@ -1,4 +1,4 @@
-package domain.definition
+package domain.model.definition
 
 
 fun boardDefinition(howToBuild: BoardDefinitionBuilder.() -> Unit): BoardDefinition {

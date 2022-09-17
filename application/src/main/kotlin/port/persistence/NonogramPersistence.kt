@@ -1,7 +1,7 @@
 package port.persistence
 
-import domain.BoardWithState
-import domain.state.BoardState
+import domain.model.BoardWithState
+import domain.model.state.BoardState
 
 interface NonogramPersistence {
 

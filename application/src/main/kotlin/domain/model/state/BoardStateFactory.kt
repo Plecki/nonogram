@@ -1,6 +1,6 @@
-package domain.state
+package domain.model.state
 
-import domain.definition.BoardDefinition
+import domain.model.definition.BoardDefinition
 
 interface BoardStateFactory {
 

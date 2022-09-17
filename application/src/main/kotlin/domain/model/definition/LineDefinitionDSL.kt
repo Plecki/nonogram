@@ -1,4 +1,4 @@
-package domain.definition
+package domain.model.definition
 
 class LineDefinitionBuilder {
     lateinit var values: List<Int>

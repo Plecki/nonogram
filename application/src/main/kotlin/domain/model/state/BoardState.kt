@@ -1,4 +1,4 @@
-package domain.state
+package domain.model.state
 
 interface BoardState {
 

@@ -1,6 +1,6 @@
 package usecase
 
-import domain.definition.BoardDefinition
+import domain.model.definition.BoardDefinition
 
 fun interface GetBoardUseCase {
 

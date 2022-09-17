@@ -1,5 +1,5 @@
-import domain.BoardWithState
-import domain.state.BoardState
+import domain.model.BoardWithState
+import domain.model.state.BoardState
 import port.persistence.NonogramPersistence
 
 class InMemoryPersistence : NonogramPersistence {

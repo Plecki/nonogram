@@ -1,7 +1,7 @@
-package domain
+package domain.model
 
-import domain.definition.BoardDefinition
-import domain.state.BoardState
+import domain.model.definition.BoardDefinition
+import domain.model.state.BoardState
 
 data class BoardWithState(
     val boardDefinition: BoardDefinition,

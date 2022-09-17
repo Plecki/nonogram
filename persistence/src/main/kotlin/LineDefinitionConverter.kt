@@ -1,4 +1,4 @@
-import domain.definition.LineDefinition
+import domain.model.definition.LineDefinition
 
 class LineDefinitionConverter {
     fun convert(lines: List<String>): List<LineDefinition> {

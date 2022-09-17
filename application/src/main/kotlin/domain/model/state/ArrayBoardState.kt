@@ -1,4 +1,4 @@
-package domain.state
+package domain.model.state
 
 data class ArrayBoardState(
     val state: List<List<CellState>>

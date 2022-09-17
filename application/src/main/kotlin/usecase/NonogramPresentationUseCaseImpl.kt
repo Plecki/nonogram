@@ -1,7 +1,7 @@
 package usecase
 
-import domain.BoardWithState
-import domain.state.BoardStateFactory
+import domain.model.BoardWithState
+import domain.model.state.BoardStateFactory
 import port.persistence.NonogramGetter
 import port.persistence.NonogramPersistence
 import port.presentation.NonogramPresentation

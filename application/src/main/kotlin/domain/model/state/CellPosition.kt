@@ -1,4 +1,4 @@
-package domain.state
+package domain.model.state
 
 @JvmInline
 value class CellPosition(val position: Pair<Int, Int>) {
