@@ -13,7 +13,19 @@ data class BoardWithState(
     }
 
     fun isSolved(): Boolean {
-        val stateOfCell = boardState.getStateOf(0, 0).state
-        return stateOfCell
+        return linesWithState(boardDefinition, boardState)
+            .all { it.isSolved() }
+    }
+
+    private fun linesWithState(
+        boardDefinition: BoardDefinition,
+        boardState: BoardState,
+    ) = sequence {
+        for ((i, row) in boardDefinition.rows.withIndex()) {
+            yield(LineWithState(row, boardState.getRows()[i], boardDefinition.numberOfColumns()))
+        }
+        for ((i, column) in boardDefinition.columns.withIndex()) {
+            yield(LineWithState(column, boardState.getColumns()[i], boardDefinition.numberOfRows()))
+        }
     }
 }

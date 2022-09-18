@@ -14,4 +14,8 @@ interface BoardState {
 
     fun numberOfRows(): Int
 
+    fun getRows(): List<LineState>
+
+    fun getColumns(): List<LineState>
+
 }

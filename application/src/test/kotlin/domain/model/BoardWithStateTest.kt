@@ -58,4 +58,16 @@ class BoardWithStateTest : ShouldSpec({
             ArrayBoardState.fromString("X")
         ).isSolved() shouldBe true
     }
+
+    should("2x2 board recognize solved") {
+        BoardWithState(
+            boardDefinition {
+                +row(1)
+                +row(2)
+                +column(1)
+                +column(2)
+            },
+            ArrayBoardState.fromString("-X\nXX")
+        ).isSolved() shouldBe true
+    }
 })

@@ -71,6 +71,15 @@ data class ArrayBoardState(
 
     override fun numberOfRows(): Int = state.size
 
+    override fun getRows(): List<LineState> = state.map { LineState(it) }
+
+    override fun getColumns(): List<LineState> {
+        return (0 until state[0].size)
+            .map { columnIndex ->
+                LineState(state.map { row -> row[columnIndex] })
+            }
+    }
+
     private fun containsPosition(cellPosition: CellPosition): Boolean {
         return cellPosition.getRow() >= 0 && cellPosition.getColumn() >= 0
                 && cellPosition.getRow() < state.size
