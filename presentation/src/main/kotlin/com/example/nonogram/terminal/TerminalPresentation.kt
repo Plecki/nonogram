@@ -2,6 +2,7 @@ package com.example.nonogram.terminal
 
 import domain.model.BoardWithState
 import domain.model.definition.BoardDefinition
+import domain.model.definition.LineDefinition
 import port.presentation.NonogramPresentation
 
 class TerminalPresentation : NonogramPresentation {
@@ -15,13 +16,25 @@ class TerminalPresentation : NonogramPresentation {
     }
 
     private fun rowsFrom(boardWithState: BoardWithState): List<String> {
-        val rowsForColumnDefinitions = rowsForColumnDefinitions(boardWithState.boardDefinition.columns)
+        val numberOfSpaces = boardWithState.boardDefinition.rows.maxOf { it.values.size }
+        val rowsForColumnDefinitions =
+            appendedWithSpaces(numberOfSpaces, rowsForColumnDefinitions(boardWithState.boardDefinition.columns))
         val rowsForRowDefinitionsAndState = rowsForRowDefinitionsAndState(boardWithState)
         return concatenate(rowsForColumnDefinitions, rowsForRowDefinitionsAndState)
     }
 
-    private fun rowsForColumnDefinitions(columns: List<Any>): List<String> {
-        return listOf("  1")
+    private fun rowsForColumnDefinitions(columnDefinitions: List<LineDefinition>): List<String> {
+        val maxSize = columnDefinitions
+            .map { it.values.size }
+            .maxOf { it }
+        return columnDefinitions
+            .mapIndexed { id, lineDefinition -> lineDefinition.values.getOrNull(id) }
+            .map { it?.toString() ?: " " }
+    }
+
+    private fun appendedWithSpaces(numberOfSpaces: Int, rowsForColumnDefinitions: List<String>): List<String> {
+        return rowsForColumnDefinitions
+            .map { " ".repeat(numberOfSpaces * 2) + it }
     }
 
     private fun rowsForRowDefinitionsAndState(boardWithState: BoardWithState): List<String> {
