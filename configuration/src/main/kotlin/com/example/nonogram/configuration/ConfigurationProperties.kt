@@ -15,6 +15,12 @@ class ConfigurationProperties {
     }
 
     fun getGameMode(): GameMode {
-        return GameMode.fromProperty(properties.getProperty("game.mode"))
+        val property = properties.getProperty("game.mode")
+        return GameMode.fromProperty(property)
+    }
+
+    fun getGameDefinitionFile(): File {
+        val property = properties.getProperty("game.definition.file")
+        return File(this::class.java.classLoader.getResource(property).toURI())
     }
 }
