@@ -1,9 +1,11 @@
 package com.example.nonogram
 
 import com.example.nonogram.terminal.TerminalPresentation
+import domain.model.BoardWithState
 import domain.model.definition.boardDefinition
 import domain.model.definition.column
 import domain.model.definition.row
+import domain.model.state.ArrayBoardState
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe
 
@@ -44,5 +46,24 @@ class TerminalPresentationTest : ShouldSpec({
 1
 3
 5         """.trimIndent().trimEnd()
+    }
+
+    should("create board one row and column ad full board state") {
+        // given
+        val boardDefinition = boardDefinition {
+            +row(1)
+            +column(1)
+        }
+        val boardState = ArrayBoardState.fromString("X")
+        val boardWithState = BoardWithState(boardDefinition, boardState)
+
+        // when
+        val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardWithState)
+
+        // then
+        boardToPresent shouldBe """
+  1
+1 X
+""".trimIndent().trimEnd()
     }
 })
