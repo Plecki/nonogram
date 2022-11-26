@@ -67,7 +67,7 @@ class TerminalPresentationTest : ShouldSpec({
 """.trimIndent().trimEnd()
     }
 
-    should("create board one row and multiple columns and full board state") {
+    should("create board one row and multiple columns") {
         // given
         val boardDefinition = boardDefinition {
             +row(1)
@@ -88,7 +88,7 @@ class TerminalPresentationTest : ShouldSpec({
 """.trimIndent().trimEnd()
     }
 
-    should("create board one row and multiple columns of different sizes and full board state") {
+    should("create board one row and multiple columns of different sizes") {
         // given
         val boardDefinition = boardDefinition {
             +row(1)
@@ -111,7 +111,7 @@ class TerminalPresentationTest : ShouldSpec({
 """.trimIndent().trimEnd()
     }
 
-    should("create board multiple rows and one column and full board state") {
+    should("create board multiple rows and one column") {
         // given
         val boardDefinition = boardDefinition {
             +row(1)
@@ -131,6 +131,29 @@ class TerminalPresentationTest : ShouldSpec({
 1 X
 1  
 1 X
+""".trimIndent().trimEnd()
+    }
+
+    should("create board multiple rows with more than one value and one column") {
+        // given
+        val boardDefinition = boardDefinition {
+            +row(1, 2, 5)
+            +row(1)
+            +row(1, 3)
+            +column(1)
+        }
+        val boardState = ArrayBoardState.fromString("X\n-\nX")
+        val boardWithState = BoardWithState(boardDefinition, boardState)
+
+        // when
+        val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardWithState)
+
+        // then
+        boardToPresent shouldBe """
+      1
+1 2 5 X
+    1  
+  1 3 X
 """.trimIndent().trimEnd()
     }
 })

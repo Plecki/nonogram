@@ -47,11 +47,15 @@ class TerminalPresentation : NonogramPresentation {
     }
 
     private fun rowsForRowDefinitions(rows: List<LineDefinition>): List<String> {
-//        val maxRowSize = rows
-//            .maxOf { it.values.size }
+        val maxRowSize = rows
+            .maxOf { it.values.size }
 
-        return rows.map { it.values }
-            .map { it.joinToString(separator = " ") { value -> value.toString() } }
+        return rows.map { lineDefinition ->
+            (0 until maxRowSize)
+                .map { id -> lineDefinition.values.getOrNull(lineDefinition.values.size - maxRowSize + id) }
+                .map { it?.toString() ?: " " }
+                .joinToString(separator = " ")
+        }
     }
 
     private fun rowsForState(boardState: BoardState): List<String> {
