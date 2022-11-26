@@ -110,4 +110,27 @@ class TerminalPresentationTest : ShouldSpec({
 1 X
 """.trimIndent().trimEnd()
     }
+
+    should("create board multiple rows and one column and full board state") {
+        // given
+        val boardDefinition = boardDefinition {
+            +row(1)
+            +row(1)
+            +row(1)
+            +column(3)
+        }
+        val boardState = ArrayBoardState.fromString("X\n-\nX")
+        val boardWithState = BoardWithState(boardDefinition, boardState)
+
+        // when
+        val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardWithState)
+
+        // then
+        boardToPresent shouldBe """
+  3
+1 X
+1  
+1 X
+""".trimIndent().trimEnd()
+    }
 })

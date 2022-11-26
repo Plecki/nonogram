@@ -3,6 +3,7 @@ package com.example.nonogram.terminal
 import domain.model.BoardWithState
 import domain.model.definition.BoardDefinition
 import domain.model.definition.LineDefinition
+import domain.model.state.BoardState
 import port.presentation.NonogramPresentation
 
 class TerminalPresentation : NonogramPresentation {
@@ -39,10 +40,25 @@ class TerminalPresentation : NonogramPresentation {
     }
 
     private fun rowsForRowDefinitionsAndState(boardWithState: BoardWithState): List<String> {
-        return listOf("1 X")
+        val rowsForRowDefinitions = rowsForRowDefinitions(boardWithState.boardDefinition.rows)
+        val rowsForState = rowsForState(boardWithState.boardState)
+        return rowsForRowDefinitions
+            .mapIndexed { id, row -> row + " " + rowsForState[id] }
     }
 
-    private fun concatenate(vararg rows: List<String>) = listOf(*rows).flatten()
+    private fun rowsForRowDefinitions(rows: List<LineDefinition>): List<String> {
+//        val maxRowSize = rows
+//            .maxOf { it.values.size }
+
+        return rows.map { it.values }
+            .map { it.joinToString(separator = " ") { value -> value.toString() } }
+    }
+
+    private fun rowsForState(boardState: BoardState): List<String> {
+        return listOf("X", " ", "X")
+    }
+
+    private fun <T> concatenate(vararg rows: List<T>) = listOf(*rows).flatten()
 
     fun createBoardToPresent(nonogram: BoardDefinition): String {
         val initialSpaces = "  "
