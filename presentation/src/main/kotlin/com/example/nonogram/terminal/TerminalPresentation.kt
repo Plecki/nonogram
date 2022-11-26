@@ -27,9 +27,10 @@ class TerminalPresentation : NonogramPresentation {
         val maxSize = columnDefinitions
             .map { it.values.size }
             .maxOf { it }
-        return columnDefinitions
-            .mapIndexed { id, lineDefinition -> lineDefinition.values.getOrNull(id) }
-            .map { it?.toString() ?: " " }
+        return (0 until maxSize)
+            .map { id -> columnDefinitions.map { it.values.getOrNull(id) } }
+            .map { line -> line.map { it?.toString() ?: " " } }
+            .map { it.joinToString(separator = " ") }
     }
 
     private fun appendedWithSpaces(numberOfSpaces: Int, rowsForColumnDefinitions: List<String>): List<String> {
