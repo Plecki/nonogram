@@ -68,20 +68,12 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
     fun Board(boardDefinition: BoardDefinition, boardState: MutableState<BoardState>) {
         Column {
             Row {
-                sampleCard()
                 showColumnDefinitions(boardDefinition.columns)
             }
             Row {
                 showRowDefinitions(boardDefinition.rows)
                 showNonogramGrid(boardState, boardDefinition.columns.size, boardDefinition.rows.size)
             }
-        }
-    }
-
-    @Composable
-    private fun sampleCard() {
-        Card(backgroundColor = Color.Blue) {
-            Text("Something")
         }
     }
 
