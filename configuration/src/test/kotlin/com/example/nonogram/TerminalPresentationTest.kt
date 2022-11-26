@@ -24,7 +24,8 @@ class TerminalPresentationTest : ShouldSpec({
         // then
         boardToPresent shouldBe """
   1
-1            """.trimIndent().trimEnd()
+1
+""".trimIndent()
     }
 
     should("create board to present with multiple rows and columns with one one-digit value each") {
@@ -45,7 +46,8 @@ class TerminalPresentationTest : ShouldSpec({
   4 2
 1
 3
-5         """.trimIndent().trimEnd()
+5
+""".trimIndent()
     }
 
     should("create board one row and column ad full board state") {
@@ -64,7 +66,7 @@ class TerminalPresentationTest : ShouldSpec({
         boardToPresent shouldBe """
   1
 1 X
-""".trimIndent().trimEnd()
+""".trimIndent()
     }
 
     should("create board one row and multiple columns") {
@@ -84,8 +86,8 @@ class TerminalPresentationTest : ShouldSpec({
         boardToPresent shouldBe """
   1 3
   2 4
-1 X
-""".trimIndent().trimEnd()
+1 X  
+""".trimIndent()
     }
 
     should("create board one row and multiple columns of different sizes") {
@@ -107,8 +109,8 @@ class TerminalPresentationTest : ShouldSpec({
     1  
   2 3 7
   5 4 8
-1 X
-""".trimIndent().trimEnd()
+1 X    
+""".trimIndent()
     }
 
     should("create board multiple rows and one column") {
@@ -131,7 +133,7 @@ class TerminalPresentationTest : ShouldSpec({
 1 X
 1  
 1 X
-""".trimIndent().trimEnd()
+""".trimIndent()
     }
 
     should("create board multiple rows with more than one value and one column") {
@@ -154,6 +156,33 @@ class TerminalPresentationTest : ShouldSpec({
 1 2 5 X
     1  
   1 3 X
-""".trimIndent().trimEnd()
+""".trimIndent()
+    }
+
+    should("create board multiple rows and multiple columns with more than one value") {
+        // given
+        val boardDefinition = boardDefinition {
+            +row(1, 2, 5)
+            +row(1)
+            +row(1, 3)
+            +column(2, 5)
+            +column(1, 3, 4)
+            +column(7, 8)
+        }
+        val boardState = ArrayBoardState.fromString("X-X\n-X-\nXXX")
+        val boardWithState = BoardWithState(boardDefinition, boardState)
+
+        // when
+        val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardWithState)
+
+        // then
+        boardToPresent shouldBe """
+        1  
+      2 3 7
+      5 4 8
+1 2 5 X   X
+    1   X  
+  1 3 X X X
+""".trimIndent()
     }
 })

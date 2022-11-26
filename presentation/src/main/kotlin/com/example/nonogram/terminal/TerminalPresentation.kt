@@ -4,6 +4,7 @@ import domain.model.BoardWithState
 import domain.model.definition.BoardDefinition
 import domain.model.definition.LineDefinition
 import domain.model.state.BoardState
+import domain.model.state.CellState
 import port.presentation.NonogramPresentation
 
 class TerminalPresentation : NonogramPresentation {
@@ -59,8 +60,14 @@ class TerminalPresentation : NonogramPresentation {
     }
 
     private fun rowsForState(boardState: BoardState): List<String> {
-        return listOf("X", " ", "X")
+        return boardState.getRows()
+            .map {
+                it.cellStates
+                    .joinToString(separator = " ") { mapCellState(it) }
+            }
     }
+
+    private fun mapCellState(cellState: CellState): String = if (cellState.state) "X" else " "
 
     private fun <T> concatenate(vararg rows: List<T>) = listOf(*rows).flatten()
 
