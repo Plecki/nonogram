@@ -5,7 +5,10 @@ import FileNonogramGetter
 import InMemoryPersistence
 import LineDefinitionConverter
 import RowColSplitter
+import com.example.nonogram.configuration.ConfigurationProperties
+import com.example.nonogram.desktop.DesktopGame
 import com.example.nonogram.desktop.DesktopPresentation
+import com.example.nonogram.game.GameProvider
 import com.example.nonogram.terminal.TerminalGame
 import com.example.nonogram.terminal.TerminalInputProvider
 import com.example.nonogram.terminal.TerminalPresentation
@@ -22,6 +25,7 @@ import usecase.*
 
 class NonogramApplication : KoinComponent {
     private val nonogramPresentationUseCase by inject<NonogramPresentationUseCase>()
+    private val gameProvider by inject<GameProvider>()
 
     companion object {
         private val nonogramModule = module {
@@ -31,10 +35,13 @@ class NonogramApplication : KoinComponent {
             singleOf(::DesktopPresentation)
             singleOf(::TerminalPresentation)
             singleOf(::TerminalInputProvider)
-            single { TerminalGame(get(), get(), get()) as NonogramGame }
+            singleOf(::ConfigurationProperties)
+            singleOf(::TerminalGame)
+            singleOf(::DesktopGame)
+            singleOf(::GameProvider)
             single { FileNonogramGetter("simple-nonogram.txt", get()) as NonogramGetter }
             single { ArrayBoardStateFactory() as BoardStateFactory }
-            single { NonogramPresentationUseCaseImpl(get(), get(), get(), get()) as NonogramPresentationUseCase }
+            single { NonogramPresentationUseCaseImpl(get(), get(), get()) as NonogramPresentationUseCase }
             single { GetBoardUseCaseImpl(get()) as GetBoardUseCase }
             single { GetBoardStateUseCaseImpl() as GetBoardStateUseCase }
             single { UpdateCellStateUseCaseImpl(get()) as UpdateCellStateUseCase }
@@ -54,6 +61,6 @@ class NonogramApplication : KoinComponent {
     }
 
     private fun showNonogram() {
-        nonogramPresentationUseCase.showNonogram()
+        nonogramPresentationUseCase.showNonogram(gameProvider.provide())
     }
 }

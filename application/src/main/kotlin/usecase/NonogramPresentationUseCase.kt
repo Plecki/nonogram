@@ -2,6 +2,6 @@ package usecase
 
 fun interface NonogramPresentationUseCase {
 
-    fun showNonogram()
+    fun showNonogram(nonogramGame: NonogramGame)
 
 }
