@@ -1,8 +1,9 @@
 package com.example.nonogram
 
 import com.example.nonogram.terminal.TerminalPresentation
-import domain.model.definition.BoardDefinition
-import domain.model.definition.LineDefinition
+import domain.model.definition.boardDefinition
+import domain.model.definition.column
+import domain.model.definition.row
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe
 
@@ -10,9 +11,10 @@ class TerminalPresentationTest : ShouldSpec({
 
     should("create board to present with one row and column with one one-digit value each") {
         // given
-        val rows = listOf(LineDefinition(listOf(1)))
-        val cols = listOf(LineDefinition(listOf(1)))
-        val boardDefinition = BoardDefinition(rows, cols)
+        val boardDefinition = boardDefinition {
+            +row(1)
+            +column(1)
+        }
 
         // when
         val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardDefinition)
@@ -25,9 +27,13 @@ class TerminalPresentationTest : ShouldSpec({
 
     should("create board to present with multiple rows and columns with one one-digit value each") {
         // given
-        val rows = listOf(LineDefinition(listOf(1)), LineDefinition(listOf(3)), LineDefinition(listOf(5)))
-        val cols = listOf(LineDefinition(listOf(4)), LineDefinition(listOf(2)))
-        val boardDefinition = BoardDefinition(rows, cols)
+        val boardDefinition = boardDefinition {
+            +row(1)
+            +row(3)
+            +row(5)
+            +column(4)
+            +column(2)
+        }
 
         // when
         val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardDefinition)
