@@ -28,7 +28,7 @@ class TerminalPresentation : NonogramPresentation {
             .map { it.values.size }
             .maxOf { it }
         return (0 until maxSize)
-            .map { id -> columnDefinitions.map { it.values.getOrNull(id) } }
+            .map { id -> columnDefinitions.map { it.values.getOrNull(it.values.size - maxSize + id) } }
             .map { line -> line.map { it?.toString() ?: " " } }
             .map { it.joinToString(separator = " ") }
     }
