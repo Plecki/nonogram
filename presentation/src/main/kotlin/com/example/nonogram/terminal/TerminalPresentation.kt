@@ -1,7 +1,6 @@
 package com.example.nonogram.terminal
 
 import domain.model.BoardWithState
-import domain.model.definition.BoardDefinition
 import domain.model.definition.LineDefinition
 import domain.model.state.BoardState
 import domain.model.state.CellState
@@ -10,7 +9,7 @@ import port.presentation.NonogramPresentation
 class TerminalPresentation : NonogramPresentation {
     override fun present(boardWithState: BoardWithState) {
         println("TerminalPresentation presents:")
-        println(createBoardToPresent(boardWithState.boardDefinition))
+        println(createBoardToPresent(boardWithState))
     }
 
     fun createBoardToPresent(boardWithState: BoardWithState): String {
@@ -70,22 +69,4 @@ class TerminalPresentation : NonogramPresentation {
     private fun mapCellState(cellState: CellState): String = if (cellState.state) "X" else " "
 
     private fun <T> concatenate(vararg rows: List<T>) = listOf(*rows).flatten()
-
-    fun createBoardToPresent(nonogram: BoardDefinition): String {
-        val initialSpaces = "  "
-
-        val columnsToPresent: String =
-            nonogram.columns
-                .map { it.values[0] }
-                .map { it.toString() }
-                .joinToString(separator = " ")
-
-        val rowsToPresent: String =
-            nonogram.rows
-                .map { it.values[0] }
-                .map { it.toString() }
-                .joinToString(separator = "\n")
-
-        return initialSpaces + columnsToPresent + "\n" + rowsToPresent
-    }
 }

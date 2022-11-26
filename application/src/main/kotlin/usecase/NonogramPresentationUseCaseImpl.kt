@@ -4,10 +4,9 @@ import domain.model.BoardWithState
 import domain.model.state.BoardStateFactory
 import port.persistence.NonogramGetter
 import port.persistence.NonogramPersistence
-import port.presentation.NonogramPresentation
 
 class NonogramPresentationUseCaseImpl(
-    private val nonogramPresentation: NonogramPresentation,
+    private val nonogramGame: NonogramGame,
     private val nonogramGetter: NonogramGetter,
     private val nonogramPersistence: NonogramPersistence,
     private val boardStateFactory: BoardStateFactory,
@@ -17,6 +16,6 @@ class NonogramPresentationUseCaseImpl(
         val boardDefinition = nonogramGetter.getNonogram()
         val boardWithState = BoardWithState(boardDefinition, boardStateFactory.createEmpty(boardDefinition))
         nonogramPersistence.persist(boardWithState)
-        nonogramPresentation.present(boardWithState)
+        nonogramGame.playGame(boardWithState)
     }
 }

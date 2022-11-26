@@ -6,6 +6,10 @@ plugins {
     application
 }
 
+tasks.getByName<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
 application {
     mainClass.set("com.example.nonogram.NonogramApplication")
 }

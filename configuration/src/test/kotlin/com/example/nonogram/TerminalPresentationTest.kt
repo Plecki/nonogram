@@ -11,45 +11,6 @@ import io.kotest.matchers.shouldBe
 
 class TerminalPresentationTest : ShouldSpec({
 
-    should("create board to present with one row and column with one one-digit value each") {
-        // given
-        val boardDefinition = boardDefinition {
-            +row(1)
-            +column(1)
-        }
-
-        // when
-        val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardDefinition)
-
-        // then
-        boardToPresent shouldBe """
-  1
-1
-""".trimIndent()
-    }
-
-    should("create board to present with multiple rows and columns with one one-digit value each") {
-        // given
-        val boardDefinition = boardDefinition {
-            +row(1)
-            +row(3)
-            +row(5)
-            +column(4)
-            +column(2)
-        }
-
-        // when
-        val boardToPresent: String = TerminalPresentation().createBoardToPresent(boardDefinition)
-
-        // then
-        boardToPresent shouldBe """
-  4 2
-1
-3
-5
-""".trimIndent()
-    }
-
     should("create board one row and column ad full board state") {
         // given
         val boardDefinition = boardDefinition {

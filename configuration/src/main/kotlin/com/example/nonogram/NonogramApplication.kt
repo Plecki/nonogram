@@ -6,6 +6,9 @@ import InMemoryPersistence
 import LineDefinitionConverter
 import RowColSplitter
 import com.example.nonogram.desktop.DesktopPresentation
+import com.example.nonogram.terminal.TerminalGame
+import com.example.nonogram.terminal.TerminalInputProvider
+import com.example.nonogram.terminal.TerminalPresentation
 import domain.model.state.ArrayBoardStateFactory
 import domain.model.state.BoardStateFactory
 import org.koin.core.component.KoinComponent
@@ -15,7 +18,6 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import port.persistence.NonogramGetter
 import port.persistence.NonogramPersistence
-import port.presentation.NonogramPresentation
 import usecase.*
 
 class NonogramApplication : KoinComponent {
@@ -26,7 +28,10 @@ class NonogramApplication : KoinComponent {
             singleOf(::BoardDefinitionConverter)
             singleOf(::RowColSplitter)
             singleOf(::LineDefinitionConverter)
-            single { DesktopPresentation() as NonogramPresentation }
+            singleOf(::DesktopPresentation)
+            singleOf(::TerminalPresentation)
+            singleOf(::TerminalInputProvider)
+            single { TerminalGame(get(), get(), get()) as NonogramGame }
             single { FileNonogramGetter("simple-nonogram.txt", get()) as NonogramGetter }
             single { ArrayBoardStateFactory() as BoardStateFactory }
             single { NonogramPresentationUseCaseImpl(get(), get(), get(), get()) as NonogramPresentationUseCase }
