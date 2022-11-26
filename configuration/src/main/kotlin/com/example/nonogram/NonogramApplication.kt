@@ -25,7 +25,6 @@ import usecase.*
 
 class NonogramApplication : KoinComponent {
     private val nonogramPresentationUseCase by inject<NonogramPresentationUseCase>()
-    private val gameProvider by inject<GameProvider>()
 
     companion object {
         private val nonogramModule = module {
@@ -38,10 +37,10 @@ class NonogramApplication : KoinComponent {
             singleOf(::ConfigurationProperties)
             singleOf(::TerminalGame)
             singleOf(::DesktopGame)
-            singleOf(::GameProvider)
+            factory { GameProvider(get(), get(), get()).provide() }
             single { FileNonogramGetter("simple-nonogram.txt", get()) as NonogramGetter }
             single { ArrayBoardStateFactory() as BoardStateFactory }
-            single { NonogramPresentationUseCaseImpl(get(), get(), get()) as NonogramPresentationUseCase }
+            single { NonogramPresentationUseCaseImpl(get(), get(), get(), get()) as NonogramPresentationUseCase }
             single { GetBoardUseCaseImpl(get()) as GetBoardUseCase }
             single { GetBoardStateUseCaseImpl() as GetBoardStateUseCase }
             single { UpdateCellStateUseCaseImpl(get()) as UpdateCellStateUseCase }
@@ -61,6 +60,6 @@ class NonogramApplication : KoinComponent {
     }
 
     private fun showNonogram() {
-        nonogramPresentationUseCase.showNonogram(gameProvider.provide())
+        nonogramPresentationUseCase.showNonogram()
     }
 }

@@ -9,9 +9,10 @@ class NonogramPresentationUseCaseImpl(
     private val nonogramGetter: NonogramGetter,
     private val nonogramPersistence: NonogramPersistence,
     private val boardStateFactory: BoardStateFactory,
+    private val nonogramGame: NonogramGame,
 ) : NonogramPresentationUseCase {
 
-    override fun showNonogram(nonogramGame: NonogramGame) {
+    override fun showNonogram() {
         val boardDefinition = nonogramGetter.getNonogram()
         val boardWithState = BoardWithState(boardDefinition, boardStateFactory.createEmpty(boardDefinition))
         nonogramPersistence.persist(boardWithState)
