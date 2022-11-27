@@ -58,7 +58,7 @@ class DesktopPresentation : NonogramPresentation, KoinComponent {
         Window(
             onCloseRequest = onExit,
             title = "Nonogram",
-            state = rememberWindowState(width = 600.dp, height = 400.dp),
+            state = rememberWindowState(width = 900.dp, height = 500.dp),
         ) {
             createWindowScope(boardWithState)
         }

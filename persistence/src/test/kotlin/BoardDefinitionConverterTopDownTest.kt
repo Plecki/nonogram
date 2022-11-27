@@ -2,7 +2,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe
 
-class BoardConverterTest : ShouldSpec({
+class BoardDefinitionConverterTopDownTest : ShouldSpec({
 
     should("throw exception when converting from empty file") {
         // given
@@ -70,21 +70,29 @@ class BoardConverterTest : ShouldSpec({
         // when
         val board = converter.convert(
             listOf(
-                "2 3 5", "2 27",
+                "1 1 3", "1 1 2", "1 1 2", "2 2 1", "1 1",
                 "",
-                "1 4 1", "23 53"
+                "1 3", "2 1", "1 1 1", "2 1", "5", "3 1", "4"
             )
         )
 
         // then
         val rows = board.rows
-        rows.size shouldBe 2
-        rows[0].values shouldBe listOf(2, 3, 5)
-        rows[1].values shouldBe listOf(2, 27)
+        rows.size shouldBe 5
+        rows[0].values shouldBe listOf(1, 1, 3)
+        rows[1].values shouldBe listOf(1, 1, 2)
+        rows[2].values shouldBe listOf(1, 1, 2)
+        rows[3].values shouldBe listOf(2, 2, 1)
+        rows[4].values shouldBe listOf(1, 1)
 
         val columns = board.columns
-        columns.size shouldBe 2
-        columns[0].values shouldBe listOf(1, 4, 1)
-        columns[1].values shouldBe listOf(23, 53)
+        columns.size shouldBe 7
+        columns[0].values shouldBe listOf(1, 3)
+        columns[1].values shouldBe listOf(2, 1)
+        columns[2].values shouldBe listOf(1, 1, 1)
+        columns[3].values shouldBe listOf(2, 1)
+        columns[4].values shouldBe listOf(5)
+        columns[5].values shouldBe listOf(3, 1)
+        columns[6].values shouldBe listOf(4)
     }
 })

@@ -9,8 +9,8 @@ class BoardDefinitionConverter(
             throw IllegalArgumentException("Board cannot be empty")
 
         val (rows, cols) = rowColSplitter.splitRowsAndCols(lines)
-        val rowsDefinitions = lineDefinitionConverter.convert(rows)
-        val colsDefinitions = lineDefinitionConverter.convert(cols)
+        val rowsDefinitions = lineDefinitionConverter.convert(rows, maxLineSize = cols.size)
+        val colsDefinitions = lineDefinitionConverter.convert(cols, maxLineSize = rows.size)
 
         return BoardDefinition(
             rowsDefinitions,
